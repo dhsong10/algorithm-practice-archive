@@ -1,9 +1,7 @@
 package platform.baekjoon;
 
 import java.io.*;
-import java.util.LinkedList;
 import java.util.PriorityQueue;
-import java.util.Queue;
 
 /*
 16236: 아기 상어
@@ -139,7 +137,7 @@ public class Solution16236 {
         bufferedWriter.close();
     }
 
-    static class Position implements Comparable {
+    static class Position implements Comparable<Position> {
 
         int rowIndex;
         int colIndex;
@@ -158,15 +156,13 @@ public class Solution16236 {
         }
 
         @Override
-        public int compareTo(Object o) {
-            Position targetPosition = (Position) o;
-
-            if (this.getRowIndex() != targetPosition.getRowIndex()) {
-                return this.getRowIndex() - targetPosition.getRowIndex();
+        public int compareTo(Position position) {
+            if (this.getRowIndex() != position.getRowIndex()) {
+                return this.getRowIndex() - position.getRowIndex();
             }
 
-            if (this.getColIndex() != targetPosition.getColIndex()) {
-                return this.getColIndex() - targetPosition.getColIndex();
+            if (this.getColIndex() != position.getColIndex()) {
+                return this.getColIndex() - position.getColIndex();
             }
 
             return 0;
@@ -221,7 +217,7 @@ public class Solution16236 {
         }
     }
 
-    static class Item implements Comparable {
+    static class Item implements Comparable<Item> {
 
         Position position;
         int distance;
@@ -241,13 +237,12 @@ public class Solution16236 {
 
 
         @Override
-        public int compareTo(Object o) {
-            Item targetItem = (Item) o;
-            if (this.getDistance() != targetItem.getDistance()) {
-                return this.getDistance() - targetItem.getDistance();
+        public int compareTo(Item item) {
+            if (this.getDistance() != item.getDistance()) {
+                return this.getDistance() - item.getDistance();
             }
 
-            return this.getPosition().compareTo(targetItem.getPosition());
+            return this.getPosition().compareTo(item.getPosition());
 
         }
     }
